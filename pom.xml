@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.feidian</groupId>
     <artifactId>dha-spring-boot</artifactId>
-    <version>2.0.0</version>
+    <version>1.0.0</version>
     <modules>
         <module>dha-spring-boot-autoconfigure</module>
         <module>dha-spring-boot-starter</module>
@@ -26,7 +26,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-boot.version>2.6.4</spring-boot.version>
-        <dha.version>2.0.0</dha.version>
+        <dha.version>1.0.0</dha.version>
         <lombok.version>1.18.22</lombok.version>
         <slf4j.version>1.8.0-beta4</slf4j.version>
         <nacos.version>0.2.10</nacos.version>
@@ -68,11 +68,11 @@
                 <artifactId>spring-boot-starter-logging</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <scope>test</scope>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.springframework.boot</groupId>-->
+            <!--                <artifactId>spring-boot-starter-test</artifactId>-->
+            <!--                <scope>test</scope>-->
+            <!--            </dependency>-->
             <dependency>
                 <groupId>org.feidian</groupId>
                 <artifactId>dha-spring-boot-autoconfigure</artifactId>

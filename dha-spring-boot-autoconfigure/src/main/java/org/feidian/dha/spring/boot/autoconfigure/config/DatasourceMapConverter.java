@@ -8,24 +8,23 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.feidian.dha.spring.boot.autoconfigure.domain.DataSource;
+import org.feidian.dha.spring.boot.autoconfigure.domain.DhaDataSource;
 
 /**
  * @author xunjiu
  * @date 2022/3/24 18:30
  **/
 @Slf4j
-public class DatasourceMapConverter implements NacosConfigConverter<Map<String, DataSource>> {
+public class DatasourceMapConverter implements NacosConfigConverter<Map<String, DhaDataSource>> {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
-    public boolean canConvert(Class<Map<String, DataSource>> targetClass) {
+    public boolean canConvert(Class<Map<String, DhaDataSource>> targetClass) {
         boolean canConvert = objectMapper.canSerialize(targetClass);
         if (canConvert) {
-            log.info("can convert:{}", canConvert);
-            System.out.println("can convert");
+            log.info("can convert");
         } else {
-            log.error("can convert:{}", canConvert);
+            log.error("can not convert");
             System.out.println("can not convert");
         }
         return canConvert;
@@ -33,7 +32,7 @@ public class DatasourceMapConverter implements NacosConfigConverter<Map<String, 
 
     @SneakyThrows
     @Override
-    public Map<String, DataSource> convert(String config) {
-        return objectMapper.readValue(config, new TypeReference<Map<String, DataSource>>() {});
+    public Map<String, DhaDataSource> convert(String config) {
+        return objectMapper.readValue(config, new TypeReference<Map<String, DhaDataSource>>() {});
     }
 }

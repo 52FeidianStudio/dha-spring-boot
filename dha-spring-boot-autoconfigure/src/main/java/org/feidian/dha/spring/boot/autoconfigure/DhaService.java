@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.feidian.dha.spring.boot.autoconfigure.config.DatasourceMapConverter;
-import org.feidian.dha.spring.boot.autoconfigure.domain.DataSource;
+import org.feidian.dha.spring.boot.autoconfigure.domain.DhaDataSource;
 import org.feidian.dha.spring.boot.autoconfigure.domain.DhaProperties;
 import org.feidian.dha.spring.boot.autoconfigure.route.DynamicDataSourceContextHolder;
 
@@ -32,12 +32,12 @@ public class DhaService {
     }
 
     @NacosConfigListener(dataId = DATA_ID, converter = DatasourceMapConverter.class)
-    public void getRoleAndSetDataSource(Map<String, DataSource> dataSourceMap) {
+    public void getRoleAndSetDataSource(Map<String, DhaDataSource> dataSourceMap) {
         log.info("map:{}", dataSourceMap);
-        DataSource dataSource = dataSourceMap.get(dhaProperties.getAppName());
-        if (dataSource != null) {
-            log.info("data source changed,new data:{}", dataSource);
-            DynamicDataSourceContextHolder.setDataSourceRole(dataSource.getCurrentRole());
+        DhaDataSource dhaDataSource = dataSourceMap.get(dhaProperties.getAppName());
+        if (dhaDataSource != null) {
+            log.info("data source changed,new data:{}", dhaDataSource);
+            DynamicDataSourceContextHolder.setDataSourceRole(dhaDataSource.getCurrentRole());
             return;
         }
         log.info("data source changed null map:{}", dataSourceMap);
@@ -51,10 +51,10 @@ public class DhaService {
         ConfigService configService = NacosFactory.createConfigService(properties);
         String config = configService.getConfig(DATA_ID, DEFAULT_GROUP, 5000);
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, DataSource> dataSourceMap = objectMapper.readValue(config,
-            new TypeReference<Map<String, DataSource>>() {});
+        Map<String, DhaDataSource> dataSourceMap = objectMapper.readValue(config,
+            new TypeReference<Map<String, DhaDataSource>>() {});
         log.info("data source map:{}", dataSourceMap);
-        DataSource dataSource = dataSourceMap.get(dhaProperties.getAppName());
-        DynamicDataSourceContextHolder.setDataSourceRole(dataSource.getCurrentRole());
+        DhaDataSource dhaDataSource = dataSourceMap.get(dhaProperties.getAppName());
+        DynamicDataSourceContextHolder.setDataSourceRole(dhaDataSource.getCurrentRole());
     }
 }

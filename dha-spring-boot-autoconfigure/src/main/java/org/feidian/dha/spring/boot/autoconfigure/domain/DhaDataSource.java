@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DataSource {
+public class DhaDataSource {
     /**
      * 当前角色
      */
