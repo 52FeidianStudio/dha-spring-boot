@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.feidian</groupId>
+    <artifactId>dha-spring-boot</artifactId>
+    <version>2.0.0</version>
+    <modules>
+        <module>dha-spring-boot-autoconfigure</module>
+        <module>dha-spring-boot-starter</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <name>dha-spring-boot</name>
+    <description>Spring Boot Support for DHA</description>
+
+
+    <contributors>
+        <contributor>
+            <name>yin chao</name>
+            <email>yinchao.mail@foxmail.com</email>
+        </contributor>
+    </contributors>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-boot.version>2.6.4</spring-boot.version>
+        <dha.version>2.0.0</dha.version>
+        <lombok.version>1.18.22</lombok.version>
+        <slf4j.version>1.8.0-beta4</slf4j.version>
+        <nacos.version>0.2.10</nacos.version>
+        <nacos-client.vaersion>1.4.3</nacos-client.vaersion>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <optional>true</optional>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-logging</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.feidian</groupId>
+                <artifactId>dha-spring-boot-autoconfigure</artifactId>
+                <version>${dha.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.feidian</groupId>
+                <artifactId>dha-spring-boot-starter</artifactId>
+                <version>${dha.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>com.alibaba.boot</groupId>-->
+            <!--                <artifactId>nacos-config-spring-boot-starter</artifactId>-->
+            <!--                <version>${nacos.version}</version>-->
+            <!--            </dependency>-->
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos-client.vaersion}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
