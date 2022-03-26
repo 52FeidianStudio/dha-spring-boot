@@ -31,6 +31,7 @@
         <slf4j.version>1.8.0-beta4</slf4j.version>
         <nacos.version>0.2.10</nacos.version>
         <nacos-client.vaersion>1.4.3</nacos-client.vaersion>
+        <mybatis.version>2.2.2</mybatis.version>
     </properties>
 
     <dependencyManagement>
@@ -103,6 +104,11 @@
                 <groupId>com.alibaba.nacos</groupId>
                 <artifactId>nacos-client</artifactId>
                 <version>${nacos-client.vaersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

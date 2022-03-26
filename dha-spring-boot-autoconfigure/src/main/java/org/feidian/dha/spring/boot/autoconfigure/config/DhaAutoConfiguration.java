@@ -18,10 +18,10 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnClass(DhaService.class)
 @EnableConfigurationProperties(DhaProperties.class)
 @Slf4j
-public class DhaAutoConfigure {
+public class DhaAutoConfiguration {
     private final DhaProperties dhaProperties;
 
-    public DhaAutoConfigure(DhaProperties dhaProperties) {this.dhaProperties = dhaProperties;}
+    public DhaAutoConfiguration(DhaProperties dhaProperties) {this.dhaProperties = dhaProperties;}
 
     @Bean
     @ConditionalOnMissingBean(DhaService.class)

@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.feidian.dha.spring.boot.autoconfigure.config.DhaAutoConfigure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.feidian.dha.spring.boot.autoconfigure.config.DhaAutoConfiguration,org.feidian.dha.spring.boot.autoconfigure.route.DataSourceHAConfiguration
