@@ -30,7 +30,7 @@
         <lombok.version>1.18.22</lombok.version>
         <slf4j.version>1.8.0-beta4</slf4j.version>
         <nacos.version>0.2.10</nacos.version>
-        <nacos-client.vaersion>1.4.3</nacos-client.vaersion>
+        <nacos-client.version>1.4.3</nacos-client.version>
         <mybatis.version>2.2.2</mybatis.version>
     </properties>
 
@@ -74,16 +74,16 @@
             <!--                <artifactId>spring-boot-starter-test</artifactId>-->
             <!--                <scope>test</scope>-->
             <!--            </dependency>-->
-            <!--            <dependency>-->
-            <!--                <groupId>org.feidian</groupId>-->
-            <!--                <artifactId>dha-spring-boot-autoconfigure</artifactId>-->
-            <!--                <version>${dha.version}</version>-->
-            <!--            </dependency>-->
-            <!--            <dependency>-->
-            <!--                <groupId>org.feidian</groupId>-->
-            <!--                <artifactId>dha-spring-boot-starter</artifactId>-->
-            <!--                <version>${dha.version}</version>-->
-            <!--            </dependency>-->
+            <dependency>
+                <groupId>org.feidian</groupId>
+                <artifactId>dha-spring-boot-autoconfigure</artifactId>
+                <version>${dha.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.feidian</groupId>
+                <artifactId>dha-spring-boot-starter</artifactId>
+                <version>${dha.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -103,7 +103,7 @@
             <dependency>
                 <groupId>com.alibaba.nacos</groupId>
                 <artifactId>nacos-client</artifactId>
-                <version>${nacos-client.vaersion}</version>
+                <version>${nacos-client.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>

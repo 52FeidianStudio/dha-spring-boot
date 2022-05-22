@@ -3,61 +3,51 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!--    <parent>-->
-    <!--        <groupId>org.feidian</groupId>-->
-    <!--        <artifactId>dha-spring-boot</artifactId>-->
-    <!--        <version>1.0.0</version>-->
-    <!--        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
-    <!--    </parent>-->
+    <parent>
+        <groupId>org.feidian</groupId>
+        <artifactId>dha-spring-boot</artifactId>
+        <version>1.0.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <artifactId>dha-spring-boot-autoconfigure</artifactId>
     <version>1.0.0</version>
-    <groupId>org.feidian</groupId>
     <name>dha-spring-boot-autoconfigure</name>
     <description>dha-spring-boot-autoconfigure</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <nacos.version>0.2.10</nacos.version>
-        <slf4j.version>1.8.0-beta4</slf4j.version>
-        <nacos-client.vaersion>1.4.3</nacos-client.vaersion>
-        <mybatis.version>2.2.2</mybatis.version>
-        <spring-boot.version>2.6.4</spring-boot.version>
+        <!--        <nacos.version>0.2.10</nacos.version>-->
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>2.6.4</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
-            <version>2.6.4</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.6.4</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
-            <version>${nacos-client.vaersion}</version>
+            <version>${nacos-client.version}</version>
         </dependency>
         <!--        <dependency>-->
         <!--            <groupId>com.alibaba.boot</groupId>-->
@@ -67,12 +57,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
-            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.version}</version>
         </dependency>
     </dependencies>
 </project>
