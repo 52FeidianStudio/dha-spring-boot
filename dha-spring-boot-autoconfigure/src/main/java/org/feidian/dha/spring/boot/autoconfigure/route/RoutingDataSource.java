@@ -1,6 +1,7 @@
 package org.feidian.dha.spring.boot.autoconfigure.route;
 
 import lombok.extern.slf4j.Slf4j;
+import org.feidian.dha.spring.boot.autoconfigure.domain.DataSourceRoleEnum;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
@@ -11,6 +12,8 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 public class RoutingDataSource extends AbstractRoutingDataSource {
     @Override
     protected Object determineCurrentLookupKey() {
-        return DynamicDataSourceContextHolder.getDataSourceRole();
+        DataSourceRoleEnum dataSourceRoleEnum = DynamicDataSourceContextHolder.getThreadLocalDataSourceRole();
+        log.info("query data source:{}", dataSourceRoleEnum);
+        return dataSourceRoleEnum;
     }
 }

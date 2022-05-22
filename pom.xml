@@ -74,16 +74,16 @@
             <!--                <artifactId>spring-boot-starter-test</artifactId>-->
             <!--                <scope>test</scope>-->
             <!--            </dependency>-->
-            <dependency>
-                <groupId>org.feidian</groupId>
-                <artifactId>dha-spring-boot-autoconfigure</artifactId>
-                <version>${dha.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.feidian</groupId>
-                <artifactId>dha-spring-boot-starter</artifactId>
-                <version>${dha.version}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.feidian</groupId>-->
+            <!--                <artifactId>dha-spring-boot-autoconfigure</artifactId>-->
+            <!--                <version>${dha.version}</version>-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.feidian</groupId>-->
+            <!--                <artifactId>dha-spring-boot-starter</artifactId>-->
+            <!--                <version>${dha.version}</version>-->
+            <!--            </dependency>-->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
