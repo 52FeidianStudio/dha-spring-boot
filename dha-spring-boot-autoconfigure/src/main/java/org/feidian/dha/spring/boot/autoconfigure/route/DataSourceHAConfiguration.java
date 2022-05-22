@@ -13,6 +13,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.plugin.Interceptor;
+import org.feidian.dha.spring.boot.autoconfigure.config.MyBatisInterceptor;
 import org.feidian.dha.spring.boot.autoconfigure.domain.DataSourceRoleEnum;
 import org.feidian.dha.spring.boot.autoconfigure.domain.DhaDataSource;
 import org.feidian.dha.spring.boot.autoconfigure.domain.DhaDataSourceProperties;
@@ -41,11 +43,8 @@ public class DataSourceHAConfiguration {
 
     @Bean(name = "standbyDataSource")
     public DataSource standbyDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
         DhaDataSourceProperties standby = dhaProperties.getStandby();
-        if (standby == null) {
-            throw new RuntimeException("config standby datasource is null");
-        }
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
         log.info("config properties:{}", dhaProperties.getStandby());
         dataSource.setUrl(standby.getJdbcUrl());
         dataSource.setUsername(standby.getUserName());
@@ -57,11 +56,8 @@ public class DataSourceHAConfiguration {
     @Bean(name = "masterDataSource")
     @Primary
     public DataSource masterDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
         DhaDataSourceProperties master = dhaProperties.getMaster();
-        if (master == null) {
-            throw new RuntimeException("config standby datasource is null");
-        }
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
         log.info("config properties:{}", dhaProperties.getMaster());
         dataSource.setUrl(master.getJdbcUrl());
         dataSource.setUsername(master.getUserName());
@@ -74,20 +70,16 @@ public class DataSourceHAConfiguration {
     @Bean("dynamicDataSource")
     public DataSource dynamicDataSource(@Qualifier("masterDataSource") DataSource masterDataSource,
         @Qualifier("standbyDataSource") DataSource standbyDataSource) {
-        if (masterDataSource == null) {
-            throw new RuntimeException("master data source is null");
-        }
-        if (standbyDataSource == null) {
-            throw new RuntimeException("standby data source is null");
-        }
         RoutingDataSource routingDataSource = new RoutingDataSource();
         log.info("param:master:{},standby:{}", masterDataSource, standbyDataSource);
         HashMap<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DataSourceRoleEnum.MASTER, masterDataSource);
         targetDataSources.put(DataSourceRoleEnum.STAND_BY, standbyDataSource);
-        String config = configService.getConfig(DATA_ID, DEFAULT_GROUP, 1000L);
+        String config = null;
+        config = configService.getConfig(DATA_ID, DEFAULT_GROUP, 1000L);
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, DhaDataSource> map = objectMapper.readValue(config, new TypeReference<Map<String, DhaDataSource>>() {});
+        Map<String, DhaDataSource> map = null;
+        map = objectMapper.readValue(config, new TypeReference<Map<String, DhaDataSource>>() {});
         DhaDataSource appDataSource = map.get(dhaProperties.getAppName());
         DataSource defaultDataSource;
         log.info("init appDataSource:{}", appDataSource);
@@ -95,12 +87,10 @@ public class DataSourceHAConfiguration {
             log.info("init dha standby");
             defaultDataSource = standbyDataSource;
             DynamicDataSourceContextHolder.setGlobalDataSourceRole(DataSourceRoleEnum.STAND_BY);
-            DynamicDataSourceContextHolder.setThreadLocalDataSourceRole(DataSourceRoleEnum.STAND_BY);
         } else {
             log.info("init dha master");
             defaultDataSource = masterDataSource;
             DynamicDataSourceContextHolder.setGlobalDataSourceRole(DataSourceRoleEnum.MASTER);
-            DynamicDataSourceContextHolder.setThreadLocalDataSourceRole(DataSourceRoleEnum.MASTER);
         }
         routingDataSource.setDefaultTargetDataSource(defaultDataSource);
         routingDataSource.setTargetDataSources(targetDataSources);
@@ -114,4 +104,10 @@ public class DataSourceHAConfiguration {
             factoryBean.setDataSource(dynamicDataSource);
         };
     }
+
+    @Bean
+    Interceptor mybatisReadWriteSplit() {
+        return new MyBatisInterceptor();
+    }
+
 }

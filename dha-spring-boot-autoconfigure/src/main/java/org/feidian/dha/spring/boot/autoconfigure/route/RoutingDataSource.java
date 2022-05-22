@@ -12,8 +12,11 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 public class RoutingDataSource extends AbstractRoutingDataSource {
     @Override
     protected Object determineCurrentLookupKey() {
-        DataSourceRoleEnum dataSourceRoleEnum = DynamicDataSourceContextHolder.getThreadLocalDataSourceRole();
-        log.info("query data source:{}", dataSourceRoleEnum);
-        return dataSourceRoleEnum;
+        DataSourceRoleEnum threadLocalDataSourceRoleEnum = DynamicDataSourceContextHolder.getThreadLocalDataSourceRole();
+        if (threadLocalDataSourceRoleEnum != null) {
+            return threadLocalDataSourceRoleEnum;
+        }
+        log.error("get thread local data source role null");
+        return DynamicDataSourceContextHolder.getGlobalDataSourceRole();
     }
 }

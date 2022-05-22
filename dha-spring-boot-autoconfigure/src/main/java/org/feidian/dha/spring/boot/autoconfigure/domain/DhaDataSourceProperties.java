@@ -25,11 +25,7 @@ public class DhaDataSourceProperties {
      */
     private String password;
     /**
-     * 高权限账户名
+     * region 信息
      */
-    private String adminName;
-    /**
-     * 高权限用户密码
-     */
-    private String adminPassword;
+    private String region;
 }
