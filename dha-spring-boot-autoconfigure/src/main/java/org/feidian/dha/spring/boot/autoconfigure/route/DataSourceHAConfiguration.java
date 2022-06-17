@@ -1,14 +1,7 @@
 package org.feidian.dha.spring.boot.autoconfigure.route;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
 import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.config.ConfigService;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -25,6 +18,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.alibaba.nacos.api.common.Constants.DEFAULT_GROUP;
 import static org.feidian.dha.spring.boot.autoconfigure.config.Constant.DATA_ID;
@@ -44,6 +42,9 @@ public class DataSourceHAConfiguration {
     @Bean(name = "standbyDataSource")
     public DataSource standbyDataSource() {
         DhaDataSourceProperties standby = dhaProperties.getStandby();
+        if (standby == null) {
+            return null;
+        }
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         log.info("config properties:{}", dhaProperties.getStandby());
         dataSource.setUrl(standby.getJdbcUrl());
@@ -72,6 +73,9 @@ public class DataSourceHAConfiguration {
         @Qualifier("standbyDataSource") DataSource standbyDataSource) {
         RoutingDataSource routingDataSource = new RoutingDataSource();
         log.info("param:master:{},standby:{}", masterDataSource, standbyDataSource);
+        if (standbyDataSource == null) {
+            standbyDataSource = masterDataSource;
+        }
         HashMap<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DataSourceRoleEnum.MASTER, masterDataSource);
         targetDataSources.put(DataSourceRoleEnum.STAND_BY, standbyDataSource);
@@ -79,7 +83,8 @@ public class DataSourceHAConfiguration {
         config = configService.getConfig(DATA_ID, DEFAULT_GROUP, 1000L);
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, DhaDataSource> map = null;
-        map = objectMapper.readValue(config, new TypeReference<Map<String, DhaDataSource>>() {});
+        map = objectMapper.readValue(config, new TypeReference<Map<String, DhaDataSource>>() {
+        });
         DhaDataSource appDataSource = map.get(dhaProperties.getAppName());
         DataSource defaultDataSource;
         log.info("init appDataSource:{}", appDataSource);
